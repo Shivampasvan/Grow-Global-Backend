@@ -5,8 +5,9 @@ const { PostModel } = require("../Models/post.model");
 // --------------->>>>>>>> Get Specific Post  <<<<<<<<-------------------
 
 postRouter.get("/get", async (req, res) => {
+  const user = req.headers.user
   try {
-    const post = await PostModel.find();
+    const post = await PostModel.find({user});
     res.status(200).send(post);
   } catch (error) {
     res.status(400).send({ msg: error.message });
